@@ -63,7 +63,6 @@ React Frontend Route:
    http://localhost:3000/admin
 
 ```
----
 
 ---
 
@@ -212,7 +211,6 @@ queue-backend/
 | `/api/employee/peek-next-customer`| GET     | counterNumber     | Peek at the next customer without dequeuing         |
 | `/api/employee/next-customer`     | POST    | counterNumber     | Call and dequeue the next customer                  |
 
----
 
 ## 🎫 Queue Entry Controller
 
