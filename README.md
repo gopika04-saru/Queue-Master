@@ -1,20 +1,24 @@
 # Queue Management System Backend
 
-## Description
-The **Queue Management System Backend** is built using **Spring Boot** and **PostgreSQL**. It allows employees to efficiently manage customer queues through a RESTful API, enabling smooth operations in environments like banks, service centers, or government offices.
+## Description  
+The **Queue Management System Backend** is a **team-based project** built using **Spring Boot** and **PostgreSQL**. It enables employees to efficiently manage customer queues through a RESTful API, improving service operations in environments such as banks, service centers, and government offices.
 
-This project is aimed to optimize the current queue system being used in retail stores, fast food restaurants and other institutions where long queues are present. the customer can book their place in the queue and receive an **AI-generated estimate of waiting time**, allowing them to wait comfortably instead of standing in line. This project is built as a website. The user can use their mobile phone to scan a QR code and be redirected to a webpage which will be used to register the user into the queue and provide them with a token number. A confirmation of their registration will also be sent to their mobile number as SMS and their email address. Following registration, the user will be sent to a webpage where they can check their position and counter number using token number. The user will also be notified through SMS and email when its their turn.
+This project is aimed to optimize the current queue systems being used in retail stores, fast food restaurants, and other institutions where long queues are present. Customers can book their place in the queue and receive an **AI-generated estimate of waiting time**, allowing them to wait comfortably instead of standing in line.
+
+The project is built as a website where users can scan a **QR code** using their mobile phone, register into the queue, and receive a **token number**. A confirmation message will be sent to their **mobile number (via SMS)** and **email address**. After registration, users are redirected to a page where they can view their position and assigned counter number using the token. Notifications are also sent when it's their turn.
+
+Additionally, the project features an **Admin Dashboard** that enables the admin to manage employees. Admins can **assign or update counter numbers**, **remove employees**, and **monitor all customers and employee status** through a clean UI. This improves staff coordination and helps in efficient queue distribution and load balancing.
 
 ---
 
 ## Features
+- Admin dashboard to manage employees and counters.
 - Employee login and counter assignment.
 - Customer queue management (join, view, call next).
 - Real-time queue updates and customer status tracking.
 - Queue entry completion with email notification.
 - Estimated wait time calculated using basic AI logic.
 - Estimated wait time sent to customer via email upon joining queue.
-- Admin features to manage employees and counters.
 
 ---
 
@@ -37,6 +41,44 @@ This helps reduce customer frustration and improves queue transparency.
 - **Spring Data JPA**
 - **Email Notifications (JavaMailSender)**
 
+---
+
+## 🔐 Admin Dashboard
+
+The Admin Dashboard allows system administrators to:
+
+- View all employees and assign counters.
+- Update or change an employee’s counter.
+- Remove employees.
+- View the entire customer queue.
+- Assign new counters via dedicated forms.
+- Navigate seamlessly with sticky headers and tabbed layout.
+
+---
+
+### 📍 URL Path
+
+React Frontend Route:
+```
+   http://localhost:3000/admin
+
+```
+---
+
+---
+
+### 📁 Optional: Folder Structure Addition
+
+```md
+queue-frontend/
+├── src/
+│   ├── components/
+│   │   ├── AdminDashboard         #admin related activities (shown in admin folder)
+│   │   ├── Employee
+│   │   └── Queue
+│   ├── App.js
+│   └── ...
+```
 ---
 
 ## Dependencies
@@ -151,20 +193,30 @@ queue-backend/
 
 ## API Endpoints
 
+## 🛠️ Admin Controller
+
+| Endpoint                                | Method | Parameters / Body         | Description                                 |
+|-----------------------------------------|--------|---------------------------|---------------------------------------------|
+| `/api/employee/all-for-admin`           | GET    | None                      | Retrieve all employees for Admin dashboard  |
+| `/api/employee/delete/{id}`             | DELETE | id                        | Delete an employee by their ID              |
+| `/api/employee/assign-counter`          | POST   | username,counterNumber,C1 | Assign a new counter to an employee         |
+| `/api/employee/update-counter`          | PUT    | id,counterNumber,C2       | Update counter assigned to an employee      |
+
+
 ## 🧑‍💼 Employee Controller
 
 | Endpoint                           | Method | Parameters        | Description                                         |
 |------------------------------------|--------|-------------------|-----------------------------------------------------|
 | `/api/employee/login`              | POST   | username, password| Employee login                                      |
-| `/api/employee/queue-list`         | GET    | counterNumber     | Get list of queued customers for a counter         |
-| `/api/employee/peek-next-customer`| GET    | counterNumber     | Peek at the next customer without dequeuing        |
-| `/api/employee/next-customer`     | POST   | counterNumber     | Call and dequeue the next customer                 |
+| `/api/employee/queue-list`         | GET    | counterNumber     | Get list of queued customers for a counter          |
+| `/api/employee/peek-next-customer`| GET     | counterNumber     | Peek at the next customer without dequeuing         |
+| `/api/employee/next-customer`     | POST    | counterNumber     | Call and dequeue the next customer                  |
 
 ---
 
 ## 🎫 Queue Entry Controller
 
-| Endpoint                             | Method | Parameters / Body         | Description                          |
+| Endpoint                             | Method | Parameters / Body          | Description                           |
 |--------------------------------------|--------|----------------------------|--------------------------------------|
 | `/api/queue/join-queue`              | POST   | `{ customer details }`     | Customer joins the queue             |
 | `/api/queue/all`                     | GET    | None                       | Retrieve all queue entries           |
