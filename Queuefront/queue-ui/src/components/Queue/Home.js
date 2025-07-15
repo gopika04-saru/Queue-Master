@@ -14,9 +14,14 @@ const Home = () => {
         <div className="logo" onClick={() => navigate('/')}>
           📲 <strong>QueueMaster</strong>
         </div>
-        <button className="employee-link" onClick={() => navigate('/employee-login')}>
-          Employee Login
-        </button>
+        <div className="header-button-group">
+          <button className="employee-link" onClick={() => navigate('/employee-login')}>
+            Employee Login
+          </button>
+          <button className="employee-link" onClick={() => navigate('/admin-dashboard')}>
+            Admin Dashboard
+          </button>
+        </div>
       </header>
 
       <main className="main-content">

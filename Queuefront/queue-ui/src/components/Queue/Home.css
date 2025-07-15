@@ -20,6 +20,29 @@
   z-index: 1000;
 }
 
+.header-button-group {
+  display: flex;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.header-button-group .employee-link {
+  border: none;
+  padding: 0.5rem 1.25rem;
+  color: #2563eb;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.header-button-group .employee-link:last-child {
+  border-right: none;
+}
+
+.header-button-group .employee-link:hover {
+  background-color: #e0edff;
+}
+
 .logo {
   font-size: 1.5rem;
   color: #2563eb;

@@ -2,6 +2,7 @@ package com.queueapp.queue_backend.controller;
 
 import com.queueapp.queue_backend.model.Employee;
 import com.queueapp.queue_backend.model.QueueEntry;
+import com.queueapp.queue_backend.model.dto.AdminEmployee;
 import com.queueapp.queue_backend.model.dto.EmployeeLoginResponse;
 import com.queueapp.queue_backend.service.EmployeeService;
 import com.queueapp.queue_backend.service.QueueEntryService;
@@ -56,5 +57,39 @@ public class EmployeeController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        Employee saved = employeeService.saveEmployee(employee);
+        return ResponseEntity.ok(saved);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        boolean deleted = employeeService.deleteEmployee(id);
+        if (deleted) {
+            return ResponseEntity.ok("Employee deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/update-counter/{id}")
+    public ResponseEntity<Employee> updateCounter(@PathVariable Long id, @RequestParam String counterNumber) {
+        Optional<Employee> updated = employeeService.updateEmployeeCounter(id, counterNumber);
+        return updated.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all-for-admin")
+    public ResponseEntity<List<AdminEmployee>> getAdminViewEmployees() {
+        List<AdminEmployee> adminEmployeeList = employeeService.getAdminEmployeeList();
+        return ResponseEntity.ok(adminEmployeeList);
     }
 }
