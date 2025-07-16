@@ -9,6 +9,11 @@ The project is built as a website where users can scan a **QR code** using their
 
 Additionally, the project features an **Admin Dashboard** that enables the admin to manage employees. Admins can **assign or update counter numbers**, **remove employees**, and **monitor all customers and employee status** through a clean UI. This improves staff coordination and helps in efficient queue distribution and load balancing.
 
+This project has been successfully deployed. The backend is Dockerized and hosted on Render, the frontend is deployed using Netlify, and the PostgreSQL database is hosted on Neon cloud.
+
+## 👉 Access the live project here:
+🌐 Frontend URL: https://strong-travesseiro-eef607.netlify.app
+
 ---
 
 ## Features
@@ -266,6 +271,127 @@ spring.jpa.show-sql=true
    git push origin feature-branch
    ```
 5. Open a pull request.
+
+---
+## Backend Deployment – Docker + Render
+   #### 1. Build the Backend JAR File
+      ```bash
+         ./mvnw clean package
+      ```
+   This creates a .jar file in target/queue-backend-0.0.1-SNAPSHOT.jar
+
+   #### 2. Create Dockerfile (in project root)
+      ```Dockerfile
+         # Use an official Maven image to build the Spring Boot app
+         FROM maven:3.8.4-openjdk-17 AS build
+
+         # Set the working directory inside the container
+         WORKDIR /app
+
+         # Copy the pom.xml and download dependencies
+         COPY pom.xml .
+         RUN mvn dependency:go-offline
+
+         # Copy the source code and build the application
+         COPY src ./src
+         RUN mvn clean package -DskipTests
+
+         # Use an official OpenJDK image to run the application
+         FROM openjdk:17-jdk-slim
+
+         # Set working directory for runtime container
+         WORKDIR /app
+
+         # Copy the JAR from the build stage
+         COPY --from=build /app/target/queue-backend-0.0.1-SNAPSHOT.jar .
+
+         # Expose port
+         EXPOSE 8080
+
+         # Run the app
+         ENTRYPOINT ["java", "-jar", "/app/queue-backend-0.0.1-SNAPSHOT.jar"]
+      ```
+   
+   #### 3. Build Docker Image 
+      ```bash
+         docker build -t your_project_name . 
+      ```
+      before building docker just add env to cmd just like by adding $env: in front and keep url part in "" . 
+      also when running docker open docker desktop for image reference and open docker hub to tag and push the docker image in in created repo.
+
+   #### 4. Tag the Docker Image
+      ```bash
+         docker tag your_project_name docker_username/your_project_name:v1
+      ```
+   
+   #### 5. Push to Docker Hub
+      ```bash
+         docker push docker_username/your_project_name:v1
+      ```
+      Make sure the repo gopikasaranya/queue-deployment exists on Docker Hub.
+
+   #### 6. Set Up PostgreSQL on Neon.tech
+      - Create a project and database on Neon
+
+      - Copy your DB connection string (e.g., jdbc:postgresql://...)
+
+      - Keep DB credentials ready: DB_URL, DB_USERNAME, DB_PASSWORD
+
+   #### 7. ✅ Deploy Backend on Render
+      - Go to https://render.com
+
+      - Create a Web Service
+
+      - Choose Docker as deployment method
+
+      - Use your Docker image:gopikasaranya/queue-deployment:v1
+
+      - Add the following Environment Variables:
+
+               KEY         |            VALUE
+
+         ------------------|----------------------------------------
+
+            DB_URL         |       jdbc:postgresql://<your-neon-url>
+
+            DB_USERNAME    |       neondb_owner or your Neon username
+
+            DB_PASSWORD    |       your Neon password
+
+            FRONTEND_URL   |       https://strong-travesseiro-eef607.netlify.app
+
+      After adding the above, click Deploy
+---
+
+## Frontend Deployment – React + Netlify
+   #### 1. Create React App and Build
+      ```bash
+         npm run build
+      ```
+   This generates a build/ folder with static assets.
+
+   #### 2. Deploy to Netlify
+      - Go to https://netlify.com
+
+      - Drag and drop the build/ folder OR connect your GitHub repo
+
+      - Set environment variables:
+
+               key              |              Value
+
+        ------------------------|----------------------------------------
+
+         REACT_APP_BACKEND_URL  |     https://queue-deployment.onrender.com
+
+      Then click Deploy
+---
+## 🌍 Live Project URLs
+
+| Service        | URL                                                                                                                     |
+|----------------|-------------------------------------------------------------------------------------------------------------------------|
+| 🔙 Backend    | [https://queue-deployment.onrender.com](https://queue-deployment.onrender.com)                                           |
+| 🌐 Frontend   | [https://strong-travesseiro-eef607.netlify.app](https://strong-travesseiro-eef607.netlify.app)                           |
+| 🧮 Database   | [https://console.neon.tech/app/projects/jolly-rain-37321622](https://console.neon.tech/app/projects/jolly-rain-37321622) |
 
 ---
 
