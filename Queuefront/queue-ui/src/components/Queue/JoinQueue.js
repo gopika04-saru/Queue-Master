@@ -9,7 +9,7 @@ const JoinQueue = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:8080/api/queue/join-queue', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/queue/join-queue`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

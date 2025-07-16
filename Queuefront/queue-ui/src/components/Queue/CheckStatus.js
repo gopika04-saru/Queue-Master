@@ -9,7 +9,7 @@ const CheckStatus = () => {
 
   const fetchStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/queue/status/${token}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/queue/status/${token}`);
       if (response.ok) {
         const data = await response.json();
         setStatus(data);

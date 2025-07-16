@@ -11,8 +11,8 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/queue/all").then((res) => setCustomers(res.data));
-    axios.get("http://localhost:8080/api/employee/all-for-admin").then((res) => setEmployees(res.data));
+    axios.get(`${process.env.REACT_APP_API_URL}/api/queue/all`).then((res) => setCustomers(res.data));
+    axios.get(`${process.env.REACT_APP_API_URL}/api/employee/all-for-admin`).then((res) => setEmployees(res.data));
   }, []);
 
   const handleAssignRedirect = (emp) => {
@@ -29,7 +29,7 @@ function AdminDashboard() {
 
   const handleRemoveEmployee = async (id) => {
     try {
-        await axios.delete(`http://localhost:8080/api/employee/delete/${id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/employee/delete/${id}`);
         setEmployees((prev) => prev.filter((emp) => emp.id !== id));
         alert("Employee removed successfully.");
     } catch (err) {

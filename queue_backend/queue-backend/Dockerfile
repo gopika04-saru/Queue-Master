@@ -1,14 +1,28 @@
-# Use OpenJDK base image
-FROM openjdk:17
+# Use an official Maven image to build the Spring Boot app
+FROM maven:3.8.4-openjdk-17 AS build
 
-# Set metadata
-LABEL maintainer="kotak"
+# Set the working directory inside the container
+WORKDIR /app
 
-# Copy the generated jar into the container
-COPY target/queue-backend-0.0.1-SNAPSHOT.jar app.jar
+# Copy the pom.xml and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Expose the port (optional for Render, but good practice)
+# Copy the source code and build the application
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Use an official OpenJDK image to run the application
+FROM openjdk:17-jdk-slim
+
+# Set working directory for runtime container
+WORKDIR /app
+
+# Copy the JAR from the build stage
+COPY --from=build /app/target/queue-backend-0.0.1-SNAPSHOT.jar .
+
+# Expose port
 EXPOSE 8080
 
-# Run the JAR
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Run the app
+ENTRYPOINT ["java", "-jar", "/app/queue-backend-0.0.1-SNAPSHOT.jar"]

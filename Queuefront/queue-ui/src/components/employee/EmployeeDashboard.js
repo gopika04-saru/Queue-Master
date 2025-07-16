@@ -12,15 +12,13 @@ const EmployeeDashboard = () => {
   const [error, setError] = useState(null);
   const [isServed, setIsServed] = useState(false); // Track if customer was served
 
-  const API_BASE_URL = 'http://localhost:8080';
-
   const peekCustomer = useCallback(async () => {
     setLoading(true);
     setMessage('');
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/employee/peek-next-customer?counterNumber=${state.counterNumber}`,
+        `${process.env.REACT_APP_API_URL}/api/employee/peek-next-customer?counterNumber=${state.counterNumber}`,
         {
           headers: {
             'Cache-Control': 'no-cache',
@@ -64,7 +62,7 @@ const EmployeeDashboard = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/employee/next-customer?counterNumber=${state.counterNumber}`,
+        `${process.env.REACT_APP_API_URL}/api/employee/next-customer?counterNumber=${state.counterNumber}`,
         {
           method: 'POST',
         }
@@ -101,7 +99,7 @@ const EmployeeDashboard = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/queue/complete/${nextCustomer.tokenNumber}`,
+        `${process.env.REACT_APP_API_URL}/api/queue/complete/${nextCustomer.tokenNumber}`,
         {
           method: 'PUT',
         }
@@ -127,7 +125,7 @@ const EmployeeDashboard = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/employee/queue-list?counterNumber=${state.counterNumber}`
+        `${process.env.REACT_APP_API_URL}/api/employee/queue-list?counterNumber=${state.counterNumber}`
       );
       if (response.ok) {
         const queueList = await response.json();

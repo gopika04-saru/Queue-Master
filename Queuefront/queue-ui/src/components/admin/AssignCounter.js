@@ -13,11 +13,11 @@ function AssignCounter() {
   const handleAssign = async () => {
     try {
       const payload = { username, counterNumber };
-      await axios.post("http://localhost:8080/api/employee/add", payload);
-      setStatus(`✅ Counter "${counterNumber}" assigned to user "${username}" successfully.`);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/employee/add`, payload);
+      setStatus(`Counter "${counterNumber}" assigned to user "${username}" successfully.`);
     } catch (error) {
       console.error(error);
-      setStatus("❌ Failed to assign counter. Please try again.");
+      setStatus("Failed to assign counter. Please try again.");
     }
   };
 

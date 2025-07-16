@@ -15,7 +15,7 @@ function UpdateCounter() {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:8080/api/employee/update-counter/${employee.id}?counterNumber=${counterNumber}`
+        `${process.env.REACT_APP_API_URL}/api/employee/update-counter/${employee.id}?counterNumber=${counterNumber}`
       );
       setStatus(`Counter updated successfully for ${employee.username}.`);
     } catch (err) {

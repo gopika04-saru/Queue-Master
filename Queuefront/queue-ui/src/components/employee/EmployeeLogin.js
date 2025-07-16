@@ -13,7 +13,7 @@ const EmployeeLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:8080/api/employee/login',
+        `${process.env.REACT_APP_API_URL}/api/employee/login`,
         null,
         { params: { username, password } }
       );
