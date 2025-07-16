@@ -14,7 +14,6 @@ This project has been successfully deployed. The backend is Dockerized and hoste
 ## 👉 Access the live project here:
 🌐 Frontend URL: https://strong-travesseiro-eef607.netlify.app
 
----
 
 ## Features
 - Admin dashboard to manage employees and counters.
@@ -25,8 +24,6 @@ This project has been successfully deployed. The backend is Dockerized and hoste
 - Estimated wait time calculated using basic AI logic.
 - Estimated wait time sent to customer via email upon joining queue.
 
----
-
 ## AI-Based Wait Time Estimation
 
 To enhance user experience, the system includes a simple AI module that:
@@ -36,8 +33,6 @@ To enhance user experience, the system includes a simple AI module that:
 
 This helps reduce customer frustration and improves queue transparency.
 
----
-
 ## Technologies Used
 - **Java** (Spring Boot)
 - **PostgreSQL**
@@ -46,7 +41,6 @@ This helps reduce customer frustration and improves queue transparency.
 - **Spring Data JPA**
 - **Email Notifications (JavaMailSender)**
 
----
 
 ## 🔐 Admin Dashboard
 
@@ -57,19 +51,8 @@ The Admin Dashboard allows system administrators to:
 - Remove employees.
 - View the entire customer queue.
 - Assign new counters via dedicated forms.
-- Navigate seamlessly with sticky headers and tabbed layout.
+- Navigate seamlessly with sticky headers and tabbed layout.`
 
----
-
-### 📍 URL Path
-
-React Frontend Route:
-```
-   http://localhost:3000/admin
-
-```
-
----
 
 ### 📁 Optional: Folder Structure Addition
 
@@ -83,7 +66,6 @@ queue-frontend/
 │   ├── App.js
 │   └── ...
 ```
----
 
 ## Dependencies
 Include the following dependencies in your `pom.xml`:
@@ -131,8 +113,6 @@ Include the following dependencies in your `pom.xml`:
 </dependencies>
 ````
 
----
-
 ## Folder Structure
 
 ```
@@ -153,8 +133,6 @@ queue-backend/
 ├── pom.xml                                # Maven dependencies  
 └── README.md                              # Project documentation  
 ```
-
----
 
 ## Setup and Installation
 
@@ -180,7 +158,6 @@ queue-backend/
    mvn clean install
    ```
 
----
 
 ## Running the Application
 
@@ -189,11 +166,6 @@ queue-backend/
    ```bash
    mvn spring-boot:run
    ```
-
-2. **Access the application:**
-   Visit [http://localhost:8080/api/queue/](http://localhost:8080/api/queue/) to check the home route.
-
----
 
 ## API Endpoints
 
@@ -227,8 +199,6 @@ queue-backend/
 | `/api/queue/complete/{tokenNumber}`  | PUT    | Path Variable: tokenNumber | Mark the queue entry as completed    |
 
 
----
-
 ## Configuration
 
 Update `application.properties` for database and server port:
@@ -242,15 +212,11 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
----
-
 ## 📦 Technologies Used
 
 - **Backend**: Java, Spring Boot, PostgreSQL  
 - **Frontend**: React.js  
 - **Other Tools**: Postman, IntelliJ, Git, GitHub Actions
-
----
 
 ## Contributing
 
@@ -272,11 +238,10 @@ spring.jpa.show-sql=true
    ```
 5. Open a pull request.
 
----
 ## Backend Deployment – Docker + Render
    #### 1. Build the Backend JAR File
       ```bash
-         ./mvnw clean package
+      ./mvnw clean package
       ```
    This creates a .jar file in target/queue-backend-0.0.1-SNAPSHOT.jar
 
@@ -314,19 +279,19 @@ spring.jpa.show-sql=true
    
    #### 3. Build Docker Image 
       ```bash
-         docker build -t your_project_name . 
+      docker build -t your_project_name . 
       ```
       before building docker just add env to cmd just like by adding $env: in front and keep url part in "" . 
       also when running docker open docker desktop for image reference and open docker hub to tag and push the docker image in in created repo.
 
    #### 4. Tag the Docker Image
       ```bash
-         docker tag your_project_name docker_username/your_project_name:v1
+      docker tag your_project_name docker_username/your_project_name:v1
       ```
    
    #### 5. Push to Docker Hub
       ```bash
-         docker push docker_username/your_project_name:v1
+      docker push docker_username/your_project_name:v1
       ```
       Make sure the repo gopikasaranya/queue-deployment exists on Docker Hub.
 
@@ -366,7 +331,7 @@ spring.jpa.show-sql=true
 ## Frontend Deployment – React + Netlify
    #### 1. Create React App and Build
       ```bash
-         npm run build
+      npm run build
       ```
    This generates a build/ folder with static assets.
 

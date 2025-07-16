@@ -38,7 +38,7 @@ const Home = () => {
         <div className="qr-section">
           <p>Try scanning our demo QR code:</p>
           <QRCodeCanvas
-            value={`http://192.168.1.5:3000/join`}
+            value={`https://strong-travesseiro-eef607.netlify.app/join`}
             size={180}
             level="H"
             includeMargin={true}
