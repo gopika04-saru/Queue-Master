@@ -1,7 +1,7 @@
-# Queue Management System Backend
+# Queue Management System 
 
 ## Description  
-The **Queue Management System Backend** is a **team-based project** built using **Spring Boot** and **PostgreSQL**. It enables employees to efficiently manage customer queues through a RESTful API, improving service operations in environments such as banks, service centers, and government offices.
+The **Queue Management System** is a **team-based project** built using **React, Spring Boot** and **PostgreSQL**. It enables employees to efficiently manage customer queues through a RESTful API, improving service operations in environments such as banks, service centers, and government offices.
 
 This project is aimed to optimize the current queue systems being used in retail stores, fast food restaurants, and other institutions where long queues are present. Customers can book their place in the queue and receive an **AI-generated estimate of waiting time**, allowing them to wait comfortably instead of standing in line.
 
